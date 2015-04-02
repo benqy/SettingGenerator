@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>前端广告系统-广告配置文件文档</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+img{
+ border:1px solid #000;
+}
+</style>
+</head>
+<body>
+<h1>广告配置说明.</h1>
+<h2>概述</h2>
+<p>广告配置用于描述广告位的一些重要设置,以便提供接口给后端广告业务类系统生成投放广告用的表单界面.</p>
+<p>每一个广告位都有一份单独的配置.</p>
+<p>目前此配置的方案是直接在采买系统上填写,而不是提供独立的一份配置文件</p>
+<p>由于广告的配置和投放代码的生成都在采买系统上实现,因此此份文件并非要求完全遵守的规范,而是<strong>建议</strong>.</p>
+<p>最终目的是要求满足:<strong>广告开发人员可以自由的配置投放代码的模版,并且投放人员填写表单后可以准确无误的按模版内容来生成投放代码</strong>.</p>
+<p>只要是能实现这需求即可,具体的实际实现,可以按你们的方法拿出来讨论.</p>
+<h2>配置文件详解</h2>
+<p>广告配置必须<strong>至少</strong>包含以下配置项</p>
+<h3>广告位ID</h3>
+<p>新建广告位时,由采买系统自动生成,广告位ID全局唯一.</p>
+<h3>广告投放文件路径</h3>
+<p>此项包含两个属性:<strong>路径</strong> 和 <strong>文件名</strong>. 用于配置广告投放代码在cdn上的路径. 这两个属性完全相同的广告,将会生成到同一个文件中.</p>
+<h3>投放代码模版</h3>
+<p>此属性配置最终生成的投放代码的形式.</p>
+<p>此模版要实现类似于html模版引擎那样的功能,即:模版+数据=最终的投放代码.<br />
+模版需实现以下功能:<br />
+1, 变量,使用<strong>&lt;%变量%&gt;</strong>作为标识符<br />
+   以下变量名为固定变量名,据有固定的替换规则:<br />
+   a, &lt;%advid%&gt;渲染时替换为广告位ID<br />
+   b, &lt;%showlog%&gt;渲染时替换为曝光日记url<br />
+   c, &lt;%clicklog%&gt;渲染时替换为点击日记url  </p>
+<p>2, 循环  </p>
+<p>3,条件语句    </p>
+<p>简单示例:  </p>
+<p>模版 <br />
+<img src="http://oneaboveall.qiniudn.com/u2mob2rq3dcayo2yprh5x38a1y.png" />  </p>
+<p>数据 <br />
+<img src="http://oneaboveall.qiniudn.com/m31028dadlnpcabex0i2x12bot.png" />  </p>
+<p>模版+数据=投放代码<br />
+<img src="http://oneaboveall.qiniudn.com/rfb993sdu5ndbn0vq93tihenue.png" />  </p>
+<p>上面这个示例不包含循环和条件语句的示例.文档末尾将提供更详细的示例.</p>
+<h3>表单字段配置</h3>
+<p>此功能用于配置生成投放代码的表单细节.</p>
+<p>上面的示例里的广告,对应的字段配置如下:
+<img src="http://oneaboveall.qiniudn.com/vcb2h3ajw3aqbrdabjqbsb07wr.png" /></p>
+<p>每个字段对应模版里的一个变量,字段包含以下配置.</p>
+<p>必选配置:<br />
+1. type,字段的类型.<br />
+2. name,字段的标识符,跟模版里的变量名对应.  <br />
+3. label,字段的中文描述.<br />
+4. value,字段的默认值  </p>
+<p>生成表单时,可以根据type类型来决定要生成的表单元素类型. 目前定义了以下几种类型: <br />
+1. Parent,即数组,此类型可包含子配置,用于轮播类广告.<br />
+2. Hidden<br />
+3. Date<br />
+4. Time<br />
+5. File<br />
+6. Number<br />
+7. Text<br />
+8. Bool,只包含true和false两种值<br />
+9. Enum,列表类型,需配置列表内容</p>
+<p>可选配置: <br />
+1. maxSize,如果type为File,则可用此属性配置文件的大小限制(kb)<br />
+2. enumList:如果type为Enum,则用此属性配置可选列表的内容.
+格式:<br />
+<img src="http://oneaboveall.qiniudn.com/30a8ssk5ywdbort9263yix4t8d.png" />(格式1) <br />
+<img src="http://oneaboveall.qiniudn.com/5jajzlcxarc9dx8pea78f72e29.png" />(格式2,value和text一样)<br />
+3. length,如果type为Parent,则可用此属性决定子配置项(轮播数)的数量,如果length未定义,则配置项为不定长度.<br />
+4. minLength,如果type为Parent,且length未定义.则此属性决定子配置项(轮播数)的最小长度.  <br />
+5. maxLength,如果type为Parent,且length未定义.则此属性决定子配置项(轮播数)的最大长度. 
+6. childFields:如果type为Parent,则此属性用来设置子配置项.</p>
+<h3>附录</h3>
+<p>以下为包含循环和条件语句的示例,仅作参考.</p>
+<p><img src="http://oneaboveall.qiniudn.com/bqn478cvveut09j7yps4bcxhqt.png" /><br />
+(模版)</p>
+<p><img src="http://oneaboveall.qiniudn.com/2u8v5rl61cahslcqxiw29rmpzm.png" /><br />
+(字段配置)</p>
+<p><img src="http://oneaboveall.qiniudn.com/qp4ka5jqj5szik8p6j7rwabztc.png" /><br />
+(生成的投放表单)</p>
+<p><img src="http://oneaboveall.qiniudn.com/b3aq6v0fkbju4w0dofr5b7ri6y.png" /><br />
+(修改参数)  </p>
+<p><img src="http://oneaboveall.qiniudn.com/zks89rb8q1714jxenkgl4afc4n.png" /><br />
+(点保存后,生成的投放代码)  </p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

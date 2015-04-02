@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" charset="utf-8" src="http://ue.17173cdn.com/a/lib/jquery-1.11.1.min.js">
+    </script>
+    <script type="text/javascript" src="http://ue.17173cdn.com/cache/lib/v3/vda/adv-seed.js">
+    </script>
+    <script src="../src/core.js">
+    </script>
+    <script src="/src/deseralize.js">
+    </script>
+    <script src="../src/jquery.serializejson.js">
+    </script>
+    <style>
+      input{
+        width:600px;
+      }
+      span{
+        display:inline-block;
+        width:170px;
+      }
+      div{
+        margin:10px 5px;
+      }
+      span::after{
+        content:':'
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id='title'>广告代码生成工具
+    </h1>
+    <div>
+    	<span>选择广告位</span>
+      <select name="" id="advList">
+      	<option value="">请选择广告位</option>
+      </select>
+    </div>
+    <div>
+      <form action="" id="form">
+      </form>
+    </div>
+    <pre>
+<code id="code">
+</code>
+</pre>
+    <script src="/src/index.js">
+    </script>
+  </body>
+</html>
