@@ -104,7 +104,7 @@
           var target = window.event.srcElement;
           if (target.readyState == "loaded") {
             fn();
-          };
+          }
         });
       }
       document.getElementsByTagName("head")[0].appendChild(script);
@@ -121,7 +121,7 @@
     loadMetadata: function (id, fn) {
       var url = FG.BASE_DIR + '/metadatas/' + advid.toLowerCase() + '/metadata.js';
       if (FG[advid]) {
-        fn(new FG[advid]);
+        fn(new FG[advid]());
       }
       else {
         this.loadScript(url, function () {
@@ -142,7 +142,7 @@
     * @namespace FG
     * @static
     */
-  function Class() { };
+  function Class() { }
 
   /**
     * 继承当前构造函数,创建新的构造函数
